@@ -110,7 +110,7 @@ moneyItemList = function() {
   
   // sets all of the card totals to the final sheet 
   this.setCardTotals = function(sheet){
-    var totalsList = [this.cititotal, this.capitalOneTotal,this.payPalTotal,this.amexTotal ]
+    var totalsList = [this.cititotal, this.capitalOneTotal,this.amexTotal, this.payPalTotal ]
     var row = 2; 
     var column = 2;   
     var i = 0;
