@@ -1,3 +1,4 @@
+// Aggregates and sets the totals for the categories as well as the cards 
 function setTotals() { 
   var itemList = new moneyItemList();
   var itemSheet = new sheet(0);
@@ -6,6 +7,4 @@ function setTotals() {
   itemList.pullAllItems(itemSheet); 
   itemList.setCardTotals(cardSheet);
   itemList.setBudgetTotals(budgetSheet);
-  
-  
 }

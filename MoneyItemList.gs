@@ -12,7 +12,9 @@ moneyItemList = function() {
   this.list = []
   
   
-  
+  /* 
+      to-do convert this function into one that can clear all items on the list at the end of each month 
+  */
    this.clearAllItems = function(sheet){
     var row = 2; 
     var column = 1; 
@@ -92,6 +94,12 @@ moneyItemList = function() {
       } 
   }
   
+  /*
+    Todo - expand the categories  
+    House item
+    Auto 
+    Groceries 
+  */
   // Gathers all of the individual transactions and groups them based on the category they are 
   this.addToCategoryTotals = function(moneyItem){
     if(moneyItem.getCategory() == "Food"){
@@ -110,7 +118,7 @@ moneyItemList = function() {
   
   // sets all of the card totals to the final sheet 
   this.setCardTotals = function(sheet){
-    var totalsList = [this.cititotal, this.capitalOneTotal,this.amexTotal, this.payPalTotal ]
+    var totalsList = [this.cititotal, this.capitalOneTotal,this.amexTotal, this.payPalTotal,this.amazonTotal ]
     var row = 2; 
     var column = 2;   
     var i = 0;
@@ -124,7 +132,7 @@ moneyItemList = function() {
   
   // sets all of the budget totals to the final sheet 
    this.setBudgetTotals = function(sheet){
-    var totalsList = [this.foodTotal, this.miscTotal, this.billTotal, this.fastFoodTotal ]
+    var totalsList = [this.foodTotal, this.billTotal, this.miscTotal, this.fastFoodTotal]
     var row = 2; 
     var column = 3; 
     var i = 0;
@@ -138,4 +146,9 @@ moneyItemList = function() {
     }
     
   }
+  
+  /*
+    To-do set up a function that handles reimbursement items, in that it moved them to a reimbursement list 
+    with it's own totals 
+  */
 }
