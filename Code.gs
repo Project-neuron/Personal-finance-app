@@ -8,3 +8,5 @@ function setTotals() {
   itemList.setCardTotals(cardSheet);
   itemList.setBudgetTotals(budgetSheet);
 }
+
+

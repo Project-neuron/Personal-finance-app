@@ -1,4 +1,5 @@
-moneyItemList = function() { 
+itemTotal = function(){
+  
   this.cititotal = 0; 
   this.capitalOneTotal = 0;
   this.payPalTotal = 0; 
@@ -9,46 +10,26 @@ moneyItemList = function() {
   this.miscTotal = 0; 
   this.billTotal = 0;
   this.fastFoodTotal = 0; 
-  this.list = []
   
   
-  // pulls all the items and assigns values to the totals variables 
-  this.pullAllItems = function(sheet){
-    var row = 2; 
-    var column = 1; 
-    while(sheet.getItem(row,column)!= ""){
-      var itemName = sheet.getItem(row,column);
-      column ++;
-      var itemPrice = sheet.getItem(row,column);
-      column ++;
-      var cardUsed = sheet.getItem(row,column);
-      column ++;
-      var purchaseCategory = sheet.getItem(row,column);
-      column ++;
-      var reimbersable = sheet.getItem(row,column);
-      column ++; 
-      var debtor = sheet.getItem(row,column);
-      column ++;
-      
-       
-
-      var moneyItem = new moneyitem(itemName, itemPrice, cardUsed, purchaseCategory, reimbersable, debtor);
-      this.addToCardTotals(moneyItem); 
-      this.addToCategoryTotals(moneyItem);
-
-      this.list.push(moneyItem);
-      row ++;
-      column=1; 
-      
-    } 
-  
-    
+  this.getCitiTotal = function(){
+    return this.citiTotal;
   }
   
-  // places the money item object into the list 
-  this.putInList = function(moneyitem){
-    this.list.push(moneyItem);
-    
+  this.getCapitalOneTotal = function(){
+    return this.capitalOneTotal;
+  }
+  
+  this.getPayPalTotal = function(){
+    return this.payPalTotal; 
+  }
+  
+  this.getAmexTotal = function(){
+    return this.amexTotal;
+  }
+  
+  this.getAmazonTotal = function(){
+    return this.amazonTotal;
   }
   
   // gathers all of the individual transactions and groups the total based on the card used 
@@ -71,7 +52,7 @@ moneyItemList = function() {
       } 
   }
   
-  /*
+   /*
     Todo - expand the categories  
     House item
     Auto 
@@ -95,7 +76,7 @@ moneyItemList = function() {
   
   // sets all of the card totals to the final sheet 
   this.setCardTotals = function(sheet){
-    var totalsList = [this.cititotal, this.capitalOneTotal,this.amexTotal, this.payPalTotal,this.amazonTotal ]
+    var totalsList = [this.cititotal, this.capitalOneTotal,this.amexTotal, this.payPalTotal, this.amazonTotal ]
     var row = 2; 
     var column = 2;   
     var i = 0;
@@ -124,8 +105,4 @@ moneyItemList = function() {
     
   }
   
-  /*
-    To-do set up a function that handles reimbursement items, in that it moved them to a reimbursement list 
-    with it's own totals 
-  */
 }
