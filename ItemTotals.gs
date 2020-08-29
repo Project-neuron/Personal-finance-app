@@ -1,19 +1,24 @@
-itemTotal = function(){
-  
+itemTotal = function(financeSheet){
+  /**
+  * The item total class handles all summation activity required by the application 
+  * @constructor takes in a finance sheet object to do a load of the category names to the item categories
+  * @author  Elvis Okumu
+  * @version 1.0
+  * @since   2020-08-28 
+  */
+ 
+
   this.cititotal = 0; 
   this.capitalOneTotal = 0;
   this.payPalTotal = 0; 
   this.amexTotal = 0; 
   this.amazonTotal = 0;
   
-  this.foodTotal = 0; 
-  this.miscTotal = 0; 
-  this.billTotal = 0;
-  this.fastFoodTotal = 0; 
+  this.itemCategories = financeSheet.pullAllCategoryNames();
   
   
   this.getCitiTotal = function(){
-    return this.citiTotal;
+    return this.cititotal;
   }
   
   this.getCapitalOneTotal = function(){
@@ -52,27 +57,25 @@ itemTotal = function(){
       } 
   }
   
-   /*
-    Todo - expand the categories  
-    House item
-    Auto 
-    Groceries 
+  /**
+  * Method function: 
+  * Method takes a money item and and the category names from the spreadsheet and sets the totals for each category 
+  * @param  FinanceSheet object that manipulates the underlying google sheet, psudoextention of the sheet object 
+  * @param  moneyItem object that holds a transaction item 
   */
-  // Gathers all of the individual transactions and groups them based on the category they are 
   this.addToCategoryTotals = function(moneyItem){
-    if(moneyItem.getCategory() == "Food"){
-        this.foodTotal += moneyItem.getItemPrice();
+    for(var i in this.itemCategories){
+      if(this.itemCategories[i] == moneyItem.getCategory()){
+        this.itemCategories[i] = moneyItem.getItemPrice()
+        break;
       }
-      else if(moneyItem.getCategory() == "Bills"){
-        this.miscTotal += moneyItem.getItemPrice();
-      }
-      else if(moneyItem.getCategory() == "misc"){
-         this.billTotal += moneyItem.getItemPrice();
-      } 
-       else if(moneyItem.getCategory() == "Fast food"){
-        this.fastFoodTotal += moneyItem.getItemPrice();
-      }
+      
+    }
+    
+     
+   
   }
+  
   
   // sets all of the card totals to the final sheet 
   this.setCardTotals = function(sheet){
