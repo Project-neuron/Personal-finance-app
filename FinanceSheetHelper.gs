@@ -1,10 +1,18 @@
+ /**
+  * This finance sheet is an extention of the basic sheet class with specific methods geared towards the finance app
+  * @constructor takes in a  sheet object to serve as the underlying interface between the app and google sheets
+  * @author  Elvis Okumu
+  * @version 1.0
+  * @since   2020-08-28 
+  */
 financeSheet = function(sheet){
 
-  this.sheet = sheet;
+  
 
-
-   /* 
-      to-do convert this function into one that can clear all items on the list at the end of each month 
+   this.sheet = sheet;
+   /**
+  * Method function: 
+  * Method goes to the underlying spread sheet and clears all the items
   */
    this.clearAllItems = function(){
     var row = 2; 
@@ -16,8 +24,12 @@ financeSheet = function(sheet){
   
   }
   
-  // pulls all the items and assigns values to the totals variables 
-  this.pullAllItems = function( itemTotals, moneyItemList){
+  /**
+  * Method function: 
+  * Method goes to the underlying spread sheet and pulls the fincance transaction items from the sheet 
+  * and loads them into a list to be passed to another method, it also agregates the totals as well  
+  */
+  this.pullAllItems = function(itemTotals, moneyItemList){
     var row = 2; 
     var column = 1; 
     while(this.sheet.getItem(row,column)!= ""){
@@ -53,18 +65,55 @@ financeSheet = function(sheet){
   * Method function: 
   * Method goes to the underlying spread sheet and pulls the category name strings 
   * and loads them into a list to be passed to another method 
-  * @param  sheet object that manipulates the underlying google sheet
-  * @return the category name dictionary from the spread sheet 
   */
-  this.pullAllCategoryNames = function(sheet){
+  this.pullAllCategoryNames = function(){
     var row = 2; 
-    var column = 1; 
-    var itemList = {};
-    while(sheet.getItem(row,column)!= ""){
-      var categoryItemName = sheet.getItem(row,column);
-      itemlist[categoryItemName] = 0;
+    var column = 1;
+    var categoryNames = {}
+    while(this.sheet.getItem(row,column)!= ""){
+      var categoryItemName = this.sheet.getItem(row,column);
+      categoryNames[categoryItemName] = 0;
       row++;
     
     }
+    return categoryNames;
   }
+  
+   /**
+  * Method function: 
+  * Method Takes the credit card totals and assigns them to the finance sheet
+  */
+  this.setCardTotals = function(totalsList){
+    var row = 2; 
+    var column = 2;   
+    var i = 0;
+    
+    while(row <=7){
+      var item = totalsList[i]
+      this.sheet.setItem(row, column, totalsList[i])
+      i++ 
+      row++;
+    }
+    
+  }
+  
+   /**
+  * Method function: 
+  * Method Takes the budget totals  and assigns them to the finance sheet
+  *@param budget item totals dictionary 
+  */ 
+   this.setBudgetTotals = function(categoryTotals){
+    var row = 2; 
+    var column = 1;
+    for(var i in categoryTotals){
+      
+        this.sheet.setItem(row, column, i)
+        column = 3; 
+        this.sheet.setItem(row, column, categoryTotals[i])
+        column = 1; 
+        row++;
+    }    
+  }
+     
+  
 }

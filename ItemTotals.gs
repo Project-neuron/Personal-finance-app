@@ -13,31 +13,68 @@ itemTotal = function(financeSheet){
   this.payPalTotal = 0; 
   this.amexTotal = 0; 
   this.amazonTotal = 0;
+  this.mainAccountTotal = 0;
   
   this.itemCategories = financeSheet.pullAllCategoryNames();
   
+    /**
+  * Method function: 
+  * Method returns a credit card total list  
+  */
+  this.getTotalsList = function(){
+    var totalsList = [this.cititotal, this.capitalOneTotal,this.amexTotal, this.payPalTotal, this.amazonTotal, this.mainAccountTotal];
+    return totalsList;
+  }
   
+  this.getItemCategories = function(){
+    return this.itemCategories;
+  }
+  
+    /**
+  * Method function: 
+  * Method returns a credit card total   
+  */
   this.getCitiTotal = function(){
     return this.cititotal;
   }
   
+    /**
+  * Method function: 
+  * Method returns a credit card total   
+  */
   this.getCapitalOneTotal = function(){
     return this.capitalOneTotal;
   }
   
+    /**
+  * Method function: 
+  * Method returns a credit card total   
+  */
   this.getPayPalTotal = function(){
     return this.payPalTotal; 
   }
   
+   /**
+  * Method function: 
+  * Method returns a credit card total   
+  */
   this.getAmexTotal = function(){
     return this.amexTotal;
   }
   
+     /**
+  * Method function: 
+  * Method returns a credit card total   
+  */
   this.getAmazonTotal = function(){
     return this.amazonTotal;
   }
   
-  // gathers all of the individual transactions and groups the total based on the card used 
+    /**
+  * Method function: 
+  * Method aggregates the item totals into their respective card totals  
+  * @param  moneyItem object that holds a transaction item 
+  */
   this.addToCardTotals = function(moneyItem){ 
      if(moneyItem.getCardUsed() == "Citi bank"){
         this.cititotal += moneyItem.getItemPrice();
@@ -54,7 +91,11 @@ itemTotal = function(financeSheet){
       }
        else if(moneyItem.getCardUsed() == "Amazon"){
         this.amazonTotal += moneyItem.getItemPrice();
-      } 
+      }
+      else if(moneyItem.getCardUsed() == "Main account"){
+        this.mainAccountTotal += moneyItem.getItemPrice();
+      
+      }
   }
   
   /**
@@ -65,47 +106,28 @@ itemTotal = function(financeSheet){
   */
   this.addToCategoryTotals = function(moneyItem){
     for(var i in this.itemCategories){
-      if(this.itemCategories[i] == moneyItem.getCategory()){
-        this.itemCategories[i] = moneyItem.getItemPrice()
+      var item = moneyItem.getCategory();
+      if(i == moneyItem.getCategory()){
+        this.itemCategories[i] += moneyItem.getItemPrice()
         break;
       }
       
     }
-    
-     
-   
   }
   
-  
-  // sets all of the card totals to the final sheet 
-  this.setCardTotals = function(sheet){
-    var totalsList = [this.cititotal, this.capitalOneTotal,this.amexTotal, this.payPalTotal, this.amazonTotal ]
-    var row = 2; 
-    var column = 2;   
-    var i = 0;
-    while(row <=6){
-      sheet.setItem(row, column, totalsList[i])
-      i++ 
-      row++;
+  /**
+  * Method function: 
+  * Method takes a category arguement and if the category is in the dictionary it returns the value  
+  * @param  category title string 
+  * @returns  ajoining value total for the category  
+  */
+  this.getCategoryValue = function(categoryTitle){
+    if(categoryTitle in this.itemCategories){
+      return this.itemCategories[categoryTitle]
     }
     
+    
   }
   
-  // sets all of the budget totals to the final sheet 
-   this.setBudgetTotals = function(sheet){
-    var totalsList = [this.foodTotal, this.billTotal, this.miscTotal, this.fastFoodTotal]
-    var row = 2; 
-    var column = 3; 
-    var i = 0;
-    
-    while(row <= 5){
-      
-      sheet.setItem(row, column, totalsList[i])
-      i++ 
-      row++;
-      
-    }
-    
-  }
   
 }
