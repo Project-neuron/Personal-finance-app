@@ -10,7 +10,7 @@ sheet = function(index){
    this.sheets = this.app.getActiveSpreadsheet().getSheets();
    this.activeSheet = this.sheets[index];
    
-     /**
+  /**
   * Method function: 
   * Method Switches sheets   
   */
@@ -18,7 +18,7 @@ sheet = function(index){
      return this.sheets[index]
    }
    
-     /**
+  /**
   * Method function: 
   * Method gets an item from the sheet  
   */
@@ -26,7 +26,7 @@ sheet = function(index){
      return this.activeSheet.getRange(row, column).getValue();
    }
    
-     /**
+  /**
   * Method function: 
   * Method sets a value into a sheet 
   */
@@ -34,7 +34,7 @@ sheet = function(index){
      this.activeSheet.getRange(row, column).setValue(setting);
    }
    
-     /**
+  /**
   * Method function: 
   * Method returns the active sheet   
   */
@@ -42,7 +42,7 @@ sheet = function(index){
      return this.activeSheet;
    } 
    
-     /**
+  /**
   * Method function: 
   * Method returns a series of values from a sheet  
   */

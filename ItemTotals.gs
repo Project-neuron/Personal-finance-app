@@ -15,7 +15,8 @@ itemTotal = function(financeSheet){
   this.amazonTotal = 0;
   this.mainAccountTotal = 0;
   
-  this.itemCategories = financeSheet.pullAllCategoryNames();
+  this.itemCategories = financeSheet.pullAllCategoryNames(); 
+  this.debtors = {};
   
     /**
   * Method function: 
@@ -101,7 +102,6 @@ itemTotal = function(financeSheet){
   /**
   * Method function: 
   * Method takes a money item and and the category names from the spreadsheet and sets the totals for each category 
-  * @param  FinanceSheet object that manipulates the underlying google sheet, psudoextention of the sheet object 
   * @param  moneyItem object that holds a transaction item 
   */
   this.addToCategoryTotals = function(moneyItem){
@@ -125,9 +125,30 @@ itemTotal = function(financeSheet){
     if(categoryTitle in this.itemCategories){
       return this.itemCategories[categoryTitle]
     }
-    
-    
-  } 
+   } 
+  
+  /**
+  * Method function: 
+  * Method Sets the debtor totals object into debtors   
+  */
+  this.setDebtorTotals = function(){
+    this.debtors = financeSheet.getDebtorTotals();
+  }
+  
+  /**
+  * Method function: 
+  * Method Adds to the debtor totals    
+  */  
+  this.addToDebtorTotals = function(moneyItem){
+    for(var i in this.debtors){
+      if(i == moneyItem.getDebtor()){
+        this.debtors[i] += moneyItem.getItemPrice();
+        break;
+      }
+      
+    }
+  }
+  
   
   
   

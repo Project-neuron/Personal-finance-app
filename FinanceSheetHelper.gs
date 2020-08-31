@@ -132,8 +132,46 @@ financeSheet = function(sheet){
       column = 3; 
       row++;
     } 
-    return debotors;
+    return debtors;
     
+  } 
+  
+  /**
+  * Method function: 
+  * Method sets the debtor totals back into the sheet 
+  * @return dictionary of debtors 
+  */  
+  this.setDebtorTotals = function(){ 
+    var row = 2; 
+    var column = 3;   
+    for(var i in this.debtors){ 
+      this.sheet.setItem(row,column, i); 
+      column = 4; 
+      this.sheet.setItem(row,column, this.debptors[i]);   
+      column = 3; 
+      row++;
+    } 
+    
+  } 
+  
+  /**
+  * Method function: 
+  * Method sets the money item that is a debt item to the sheet to be stored   
+  * @params money item to be stored as a debt item 
+  */  
+  this.setDebtItem = function(moneyItem){ 
+    var row = 2; 
+    var column = 6;  
+    var i = 1;
+    while(i <= 3){ 
+      this.sheet.setItem(row, column, moneyitem.getItemName()); 
+      column++;
+      this.sheet.setItem(row, column, moneyitem.getItemPrice()); 
+      column++;  
+      this.sheet.setItem(row, column, moneyitem.getDebtor()); 
+      
+    } 
+  
   }
   
      
