@@ -16,6 +16,8 @@ moneyItemList = function() {
   this.putInList = function(moneyitem){
     this.list.push(moneyitem);
     
-  }
+  } 
+   
+  
   
 }

@@ -127,7 +127,9 @@ itemTotal = function(financeSheet){
     }
     
     
-  }
+  } 
+  
+  
   
   
 }

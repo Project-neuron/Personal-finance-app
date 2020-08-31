@@ -114,6 +114,28 @@ financeSheet = function(sheet){
         row++;
     }    
   }
+  
+  /**
+  * Method function: 
+  * Method Pulls all the debtors names from the sheet and sets up the dictionary totals to be appended to  
+  * @return dictionary of debtors 
+  */  
+  this.getDebtorTotals = function(){
+    var debtors = {}; 
+    var row = 2; 
+    var column = 3;   
+    while(row <=4){  
+      var debtorName = this.sheet.getItem(row,column); 
+      column = 4; 
+      var debtorTotal = this.sheet.getItem(row,column); 
+      debtors[debtorName] = debtorTotal; 
+      column = 3; 
+      row++;
+    } 
+    return debotors;
+    
+  }
+  
      
   
 }
