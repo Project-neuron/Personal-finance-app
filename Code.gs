@@ -6,12 +6,16 @@ function setTotals(){
   var cardSheet = new financeSheet(new sheet(3)); 
   
 
-  var totals = new itemTotal(itemsCategorySheet);
+  var totals = new itemTotal();
+  totals.setItemCategories(itemsCategorySheet);
+  totals.setDebtorCategories(itemsCategorySheet);
+  
   var itemList = new moneyItemList();
   
   itemSheet.pullAllItems(totals, itemList);
-  cardSheet.setCardTotals(totals.getTotalsList());
+  cardSheet.setCardTotals(totals.getCardTotals());
   budgetSheet.setBudgetTotals(totals.getItemCategories());
+  itemsCategorySheet.setDebtorTotals(totals.getDebtors());
   
 
 }

@@ -3,7 +3,7 @@ moneyitem = function(itemName, itemPrice, cardUsed, category, reimbursable, debt
     this.itemPrice = itemPrice
     this.cardUsed = cardUsed 
     this.category = category 
-    this.reimburable = reimbursable 
+    this.reimbursable = reimbursable 
     this.debtor = debtor 
     
     this.getItemName = function(){

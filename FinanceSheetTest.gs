@@ -32,9 +32,9 @@ function cardTotalsTest() {
 
 // Tests to make sure the item category totals aggregate as expected
 function categoryTotals(){
-  var itemCategorysheet = new sheet(5); 
-  var helperSheet = new financeSheet(itemCategorysheet); 
-  var totals = new itemTotal(helperSheet);
+  var itemCategorysheet = new financeSheet(new sheet(5)); 
+  var totals = new itemTotal();
+  totals.setItemCategories(itemCategorysheet)
   
   var moneyItem1 = new moneyitem("Amazon purchases",25, "Amazon", "Auto & transport", false, "");
   var moneyItem2 = new moneyitem("Parking",26,"Pay-pal","Fast food", false, "");
@@ -71,4 +71,61 @@ function categoryTotals(){
     return "fail";
   }
   
+} 
+
+function testDebtorTotals() { 
+    var itemsCategorySheet = new financeSheet(new sheet(5));  
+    var totals = new itemTotal()
+    totals.setDebtorCategories(itemsCategorySheet);  
+    
+    var moneyItem1 = new moneyitem("Amazon purchases",25, "Amazon", "Auto & transport", true, "Brian");
+    var moneyItem2 = new moneyitem("Parking",26,"Pay-pal","Fast food", true, "Fiona");
+    var moneyItem3 = new moneyitem("Door dash",27 ,"Citi bank","Shopping", true, "Mieshon"); 
+    
+    totals.addToDebtorTotals(moneyItem1);
+    totals.addToDebtorTotals(moneyItem2);
+    totals.addToDebtorTotals(moneyItem3);
+    
+    var result1 = equalsTest(totals.getDebtorValue("Brian"), 25);
+    var result2 = equalsTest(totals.getDebtorValue("Fiona"), 26);
+    var result3 = equalsTest(totals.getDebtorValue("Mieshon"), 27);
+    
+    if(result1 == "Pass" && result2 == "Pass" && result3 =="Pass"){
+      return "pass";
+    }
+    else{
+      return "fail";
+    }
+
+
+}
+
+function testAllFunctions(){
+  var test1 = testDebtorTotals(); 
+  var test2 = categoryTotals(); 
+  var test3 = cardTotalsTest(); 
+  
+
+}
+
+function setCardTotals(){
+   var itemsCategorySheet = new financeSheet(new sheet(5));
+   var itemSheet = new financeSheet(new sheet(0));
+   var cardSheet = new financeSheet(new sheet(3));
+   
+   
+  
+  var totals = new itemTotal();
+  totals.setCards(itemsCategorySheet);
+  totals.setItemCategories(itemsCategorySheet);
+  totals.setDebtorCategories(itemsCategorySheet);
+  
+  var itemList = new moneyItemList();
+  
+  itemSheet.pullAllItems(totals, itemList);
+  cardSheet.setCardTotals(totals.getCardTotals());
+  itemsCategorySheet.setDebtorTotals(totals.getDebtors());
+  
+   
+
 }

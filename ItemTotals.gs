@@ -1,4 +1,4 @@
-itemTotal = function(financeSheet){
+itemTotal = function(){
   /**
   * The item total class handles all summation activity required by the application 
   * @constructor takes in a finance sheet object to do a load of the category names to the item categories
@@ -6,70 +6,51 @@ itemTotal = function(financeSheet){
   * @version 1.0
   * @since   2020-08-28 
   */
- 
-
-  this.cititotal = 0; 
-  this.capitalOneTotal = 0;
-  this.payPalTotal = 0; 
-  this.amexTotal = 0; 
-  this.amazonTotal = 0;
-  this.mainAccountTotal = 0;
   
-  this.itemCategories = financeSheet.pullAllCategoryNames(); 
+  this.cards = {}; 
+  this.itemCategories = {}; 
   this.debtors = {};
   
-    /**
+   /**
   * Method function: 
-  * Method returns a credit card total list  
+  * Method Sets the item categories totals object into debtors   
   */
-  this.getTotalsList = function(){
-    var totalsList = [this.cititotal, this.capitalOneTotal,this.amexTotal, this.payPalTotal, this.amazonTotal, this.mainAccountTotal];
-    return totalsList;
-  }
-  
-  this.getItemCategories = function(){
-    return this.itemCategories;
+  this.setCards = function(financeSheet){
+    this.cards = financeSheet.getCardNames();
   }
   
     /**
   * Method function: 
-  * Method returns a credit card total   
+  * Method Sets the card totals object into debtors   
   */
-  this.getCitiTotal = function(){
-    return this.cititotal;
-  }
-  
-    /**
-  * Method function: 
-  * Method returns a credit card total   
-  */
-  this.getCapitalOneTotal = function(){
-    return this.capitalOneTotal;
-  }
-  
-    /**
-  * Method function: 
-  * Method returns a credit card total   
-  */
-  this.getPayPalTotal = function(){
-    return this.payPalTotal; 
+  this.setItemCategories = function(financeSheet){
+    this.itemCategories = financeSheet.pullAllCategoryNames();
   }
   
    /**
   * Method function: 
-  * Method returns a credit card total   
+  * Method Sets the debtor totals object into debtors   
   */
-  this.getAmexTotal = function(){
-    return this.amexTotal;
+  this.setDebtorCategories = function(financeSheet){
+    this.debtors = financeSheet.getDebtorTotals();
   }
   
-     /**
+    /**
   * Method function: 
-  * Method returns a credit card total   
+  * Method gets the card totals  
   */
-  this.getAmazonTotal = function(){
-    return this.amazonTotal;
+  this.getCardTotals = function(){
+    return this.cards;
   }
+  
+   /**
+  * Method function: 
+  * Method returns item categories total   
+  */
+  this.getItemCategories = function(){
+    return this.itemCategories;
+  }
+  
   
     /**
   * Method function: 
@@ -115,6 +96,34 @@ itemTotal = function(financeSheet){
     }
   }
   
+   /**
+  * Method function: 
+  * Method takes a money item and and the category names from the spreadsheet and sets the totals for each category 
+  * @param  moneyItem object that holds a transaction item 
+  */
+  this.addToCardTotalsTest = function(moneyItem){
+    for(var i in this.cards){
+      var item = moneyItem.getCardUsed();
+      if(i == moneyItem.getCardUsed()){
+        this.cards[i] += moneyItem.getItemPrice()
+        break;
+      }
+      
+    }
+  }
+  
+  /**
+  * Method function: 
+  * Method takes a category arguement and if the category is in the dictionary it returns the value  
+  * @param  category title string 
+  * @returns  ajoining value total for the category  
+  */
+  this.getCardValue = function(card){
+    if(card in this.cards){
+      return this.cards[card]
+    }
+   }
+   
   /**
   * Method function: 
   * Method takes a category arguement and if the category is in the dictionary it returns the value  
@@ -127,26 +136,42 @@ itemTotal = function(financeSheet){
     }
    } 
   
-  /**
-  * Method function: 
-  * Method Sets the debtor totals object into debtors   
-  */
-  this.setDebtorTotals = function(){
-    this.debtors = financeSheet.getDebtorTotals();
-  }
   
   /**
   * Method function: 
   * Method Adds to the debtor totals    
   */  
-  this.addToDebtorTotals = function(moneyItem){
-    for(var i in this.debtors){
-      if(i == moneyItem.getDebtor()){
-        this.debtors[i] += moneyItem.getItemPrice();
-        break;
+  this.addToDebtorTotals = function(moneyItem){ 
+      if(moneyItem.getReimbursable() == true){
+        for(var i in this.debtors){
+          if(i == moneyItem.getDebtor()){
+            this.debtors[i] += moneyItem.getItemPrice();
+            break;
+          }
+          
+        }
       }
-      
+  }
+  
+   /**
+  * Method function: 
+  * Method takes a debtor arguement and if the debtor is in the dictionary it returns the value  
+  * @param  debtor name string 
+  * @returns  ajoining value total for the debt  
+  */
+  this.getDebtorValue = function(debtorValue){
+     if(debtorValue in this.debtors){
+      return this.debtors[debtorValue]
     }
+  }
+  
+  /**
+  * Method function: 
+  *method gets the list of debtors and returns them
+  * @returns dictionary of debtors   
+  */
+  this.getDebtors = function(){
+    return this.debtors;
   }
   
   

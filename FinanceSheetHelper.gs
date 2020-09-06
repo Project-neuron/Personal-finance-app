@@ -49,8 +49,11 @@ financeSheet = function(sheet){
        
 
       var moneyItem = new moneyitem(itemName, itemPrice, cardUsed, purchaseCategory, reimbersable, debtor);
-      itemTotals.addToCardTotals(moneyItem); 
+      itemTotals.addToCardTotals(moneyItem);
+      itemTotals.addToCardTotalsTest(moneyItem) // debugging 
       itemTotals.addToCategoryTotals(moneyItem);
+      itemTotals.addToDebtorTotals(moneyItem);
+ 
 
       moneyItemList.putInList(moneyItem);
       row ++;
@@ -59,6 +62,25 @@ financeSheet = function(sheet){
     } 
   
     
+  }
+  
+  /**
+  * Method function: 
+  * Method goes to the underlying spread sheet and pulls the  card titles  strings 
+  * and loads them into a list to be passed to another method 
+  */
+  this.getCardNames = function(){
+    var row = 2; 
+    var column = 12;
+    var cardNames = {}
+    while(this.sheet.getItem(row,column)!= ""){
+      var cardItemName = this.sheet.getItem(row,column);
+      cardNames[cardItemName] = 0;
+      row++;
+    
+    }
+    return cardNames;
+  
   }
   
   /**
@@ -79,22 +101,22 @@ financeSheet = function(sheet){
     return categoryNames;
   }
   
+ 
+  
    /**
   * Method function: 
   * Method Takes the credit card totals and assigns them to the finance sheet
   */
-  this.setCardTotals = function(totalsList){
+  this.setCardTotals = function(cardTotals){
     var row = 2; 
-    var column = 2;   
-    var i = 0;
-    
-    while(row <=7){
-      var item = totalsList[i]
-      this.sheet.setItem(row, column, totalsList[i])
-      i++ 
+    var column = 1;
+    for(var i in cardTotals){
+      this.sheet.setItem(row, column, i)
+      column = 2; 
+      this.sheet.setItem(row, column, cardTotals[i])
+      column = 1; 
       row++;
     }
-    
   }
   
    /**
@@ -141,13 +163,13 @@ financeSheet = function(sheet){
   * Method sets the debtor totals back into the sheet 
   * @return dictionary of debtors 
   */  
-  this.setDebtorTotals = function(){ 
+  this.setDebtorTotals = function(debtors){ 
     var row = 2; 
     var column = 3;   
-    for(var i in this.debtors){ 
+    for(var i in debtors){ 
       this.sheet.setItem(row,column, i); 
       column = 4; 
-      this.sheet.setItem(row,column, this.debptors[i]);   
+      this.sheet.setItem(row,column, debtors[i]);   
       column = 3; 
       row++;
     } 
@@ -162,13 +184,12 @@ financeSheet = function(sheet){
   this.setDebtItem = function(moneyItem){ 
     var row = 2; 
     var column = 6;  
-    var i = 1;
-    while(i <= 3){ 
-      this.sheet.setItem(row, column, moneyitem.getItemName()); 
+    while(column <= 9){ 
+      this.sheet.setItem(row, column, moneyItem.getItemName()); 
       column++;
-      this.sheet.setItem(row, column, moneyitem.getItemPrice()); 
+      this.sheet.setItem(row, column, moneyItem.getItemPrice()); 
       column++;  
-      this.sheet.setItem(row, column, moneyitem.getDebtor()); 
+      this.sheet.setItem(row, column, moneyItem.getDebtor()); 
       
     } 
   
