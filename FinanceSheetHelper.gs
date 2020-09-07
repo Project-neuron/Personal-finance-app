@@ -50,9 +50,8 @@ financeSheet = function(sheet){
 
       var moneyItem = new moneyitem(itemName, itemPrice, cardUsed, purchaseCategory, reimbersable, debtor);
       itemTotals.addToCardTotals(moneyItem);
-      itemTotals.addToCardTotalsTest(moneyItem) // debugging 
       itemTotals.addToCategoryTotals(moneyItem);
-      itemTotals.addToDebtorTotals(moneyItem);
+      //itemTotals.addToDebtorTotals(moneyItem);
  
 
       moneyItemList.putInList(moneyItem);

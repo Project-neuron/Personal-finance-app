@@ -52,33 +52,6 @@ itemTotal = function(){
   }
   
   
-    /**
-  * Method function: 
-  * Method aggregates the item totals into their respective card totals  
-  * @param  moneyItem object that holds a transaction item 
-  */
-  this.addToCardTotals = function(moneyItem){ 
-     if(moneyItem.getCardUsed() == "Citi bank"){
-        this.cititotal += moneyItem.getItemPrice();
-      }
-      else if(moneyItem.getCardUsed() == "Capital one"){
-        this.capitalOneTotal += moneyItem.getItemPrice();
-      }
-      else if(moneyItem.getCardUsed() == "Amex"){ 
-        this.amexTotal += moneyItem.getItemPrice();
-      } 
-       else if(moneyItem.getCardUsed() == "Pay-pal"){
-         this.payPalTotal += moneyItem.getItemPrice();
-         var item = this.payPalTotal
-      }
-       else if(moneyItem.getCardUsed() == "Amazon"){
-        this.amazonTotal += moneyItem.getItemPrice();
-      }
-      else if(moneyItem.getCardUsed() == "Main account"){
-        this.mainAccountTotal += moneyItem.getItemPrice();
-      
-      }
-  }
   
   /**
   * Method function: 
@@ -101,7 +74,7 @@ itemTotal = function(){
   * Method takes a money item and and the category names from the spreadsheet and sets the totals for each category 
   * @param  moneyItem object that holds a transaction item 
   */
-  this.addToCardTotalsTest = function(moneyItem){
+  this.addToCardTotals = function(moneyItem){
     for(var i in this.cards){
       var item = moneyItem.getCardUsed();
       if(i == moneyItem.getCardUsed()){

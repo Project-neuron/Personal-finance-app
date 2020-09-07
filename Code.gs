@@ -9,6 +9,7 @@ function setTotals(){
   var totals = new itemTotal();
   totals.setItemCategories(itemsCategorySheet);
   totals.setDebtorCategories(itemsCategorySheet);
+  totals.setCards(itemsCategorySheet);
   
   var itemList = new moneyItemList();
   
