@@ -5,20 +5,32 @@ function cardTotalsTest() {
   var moneyItem2 = new moneyitem("Parking",46,"Pay-pal","Fast food", false, "");
   var moneyItem3 = new moneyitem("Door dash",38 ,"Citi bank","Bills", false, "");
   var moneyItem4 = new moneyitem("Door dash",48,"Capital one","food", false, "");
-  var moneyItem5 = new moneyitem("Door dash",53,"Amex","food", false, "");
+  var moneyItem5 = new moneyitem("Door dash",60,"Amex cash","food", false, "");
+  var moneyItem6 = new moneyitem("Door dash",53,"Amex hilton","food", false, "");
+  var moneyItem7 = new moneyitem("Door dash",71,"Main account","food", false, "");
+  var itemsCategorySheet = new financeSheet(new sheet(5));
   
   var itemTotals = new itemTotal();
+  itemTotals.setCards(itemsCategorySheet);
+  
   itemTotals.addToCardTotals(moneyItem1);
   itemTotals.addToCardTotals(moneyItem2);
   itemTotals.addToCardTotals(moneyItem3);
   itemTotals.addToCardTotals(moneyItem4);
   itemTotals.addToCardTotals(moneyItem5);
+  itemTotals.addToCardTotals(moneyItem6);
+  itemTotals.addToCardTotals(moneyItem7);
   
-  var result1 = equalsTest(itemTotals.getCitiTotal(), 38);
-  var result2 = equalsTest(itemTotals.getCapitalOneTotal(), 48); 
-  var result3 = equalsTest(itemTotals.getPayPalTotal(), 46); 
-  var result4 = equalsTest(itemTotals.getAmexTotal(), 53);
-  var result5 = equalsTest(itemTotals.getAmazonTotal(), 25); 
+  
+
+  
+  var result1 = equalsTest(itemTotals.getCardValue("Citi bank"), 38);
+  var result2 = equalsTest(itemTotals.getCardValue("Capital one"), 48); 
+  var result3 = equalsTest(itemTotals.getCardValue("Pay-pal"), 46); 
+  var result4 = equalsTest(itemTotals.getCardValue("Amex cash"), 60);
+  var result5 = equalsTest(itemTotals.getCardValue("Amex hilton"), 53);
+  var result6 = equalsTest(itemTotals.getCardValue("Amazon"), 25); 
+  var result7 = equalsTest(itemTotals.getCardValue("Main account"), 71); 
   
   if(result1 == "Pass" && result2 == "Pass" && result3 =="Pass" && result4 == "Pass" && result5 == "Pass"){
     return "pass";
@@ -104,28 +116,5 @@ function testAllFunctions(){
   var test1 = testDebtorTotals(); 
   var test2 = categoryTotals(); 
   var test3 = cardTotalsTest(); 
-  
-
 }
 
-function setCardTotals(){
-   var itemsCategorySheet = new financeSheet(new sheet(5));
-   var itemSheet = new financeSheet(new sheet(0));
-   var cardSheet = new financeSheet(new sheet(3));
-   
-   
-  
-  var totals = new itemTotal();
-  totals.setCards(itemsCategorySheet);
-  totals.setItemCategories(itemsCategorySheet);
-  totals.setDebtorCategories(itemsCategorySheet);
-  
-  var itemList = new moneyItemList();
-  
-  itemSheet.pullAllItems(totals, itemList);
-  cardSheet.setCardTotals(totals.getCardTotals());
-  itemsCategorySheet.setDebtorTotals(totals.getDebtors());
-  
-   
-
-}
