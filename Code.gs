@@ -13,10 +13,15 @@ function setTotals(){
   
   var itemList = new moneyItemList();
   
-  itemSheet.pullAllItems(totals, itemList);
+  itemSheet.pullAllItems(totals, itemList,"item",1);
+  itemsCategorySheet.pullAllItems(totals, itemList,"debtItem",6);
   cardSheet.setCardTotals(totals.getCardTotals());
   budgetSheet.setBudgetTotals(totals.getItemCategories());
   itemsCategorySheet.setDebtorTotals(totals.getDebtors());
+  
+  //To do
+  // debtorList = itemsSheet.pullAllDebtorItems(); 
+  // itemcategorySheet.saveDebtorTotals(debtorList);
   
 
 }

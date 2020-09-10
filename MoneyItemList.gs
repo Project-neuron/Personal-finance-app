@@ -16,7 +16,24 @@ moneyItemList = function() {
   this.putInList = function(moneyitem){
     this.list.push(moneyitem);
     
-  } 
+  }
+  
+  /**
+  * Method function: 
+  * Gets all money items from the main list that are debt items 
+  * returns the list of debt items 
+  */
+  
+  this.makeDebtItemsList = function(){
+    var newList = this.list.filter(function(element, index, arr){
+      return element.getReimbursable() == true;  
+    }) 
+    return newList;
+  
+  }
+  
+  
+  
    
   
   

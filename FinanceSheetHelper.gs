@@ -29,34 +29,38 @@ financeSheet = function(sheet){
   * Method goes to the underlying spread sheet and pulls the fincance transaction items from the sheet 
   * and loads them into a list to be passed to another method, it also agregates the totals as well  
   */
-  this.pullAllItems = function(itemTotals, moneyItemList){
+  this.pullAllItems = function(itemTotals, moneyItemList, itemType, column){
     var row = 2; 
-    var column = 1; 
-    while(this.sheet.getItem(row,column)!= ""){
-      var itemName = this.sheet.getItem(row,column);
-      column ++;
-      var itemPrice = this.sheet.getItem(row,column);
-      column ++;
-      var cardUsed = this.sheet.getItem(row,column);
-      column ++;
-      var purchaseCategory = this.sheet.getItem(row,column);
-      column ++;
-      var reimbersable = this.sheet.getItem(row,column);
-      column ++; 
-      var debtor = this.sheet.getItem(row,column);
-      column ++;
+    var sheetColumn = column; 
+    while(this.sheet.getItem(row,sheetColumn)!= ""){
+      var itemName = this.sheet.getItem(row,sheetColumn);
+      sheetColumn ++;
+      var itemPrice = this.sheet.getItem(row,sheetColumn);
+      sheetColumn ++;
+      var cardUsed = this.sheet.getItem(row,sheetColumn);
+      sheetColumn ++;
+      var purchaseCategory = this.sheet.getItem(row,sheetColumn);
+      sheetColumn ++;
+      var reimbersable = this.sheet.getItem(row,sheetColumn);
+      sheetColumn ++; 
+      var debtor = this.sheet.getItem(row,sheetColumn);
+      sheetColumn ++;
       
        
 
       var moneyItem = new moneyitem(itemName, itemPrice, cardUsed, purchaseCategory, reimbersable, debtor);
-      itemTotals.addToCardTotals(moneyItem);
-      itemTotals.addToCategoryTotals(moneyItem);
-      //itemTotals.addToDebtorTotals(moneyItem);
- 
-
-      moneyItemList.putInList(moneyItem);
+      if(itemType == "item"){
+        itemTotals.addToCardTotals(moneyItem);
+        itemTotals.addToCategoryTotals(moneyItem);
+        itemTotals.addToDebtorTotals(moneyItem);
+        moneyItemList.putInList(moneyItem);
+      }else if(itemType == "debtItem"){
+        itemTotals.addToDebtorTotals(moneyItem);
+       
+      
+      }
       row ++;
-      column=1; 
+      sheetColumn=column; 
       
     } 
   
@@ -70,7 +74,7 @@ financeSheet = function(sheet){
   */
   this.getCardNames = function(){
     var row = 2; 
-    var column = 12;
+    var column = 13;
     var cardNames = {}
     while(this.sheet.getItem(row,column)!= ""){
       var cardItemName = this.sheet.getItem(row,column);
@@ -148,7 +152,7 @@ financeSheet = function(sheet){
     while(row <=4){  
       var debtorName = this.sheet.getItem(row,column); 
       column = 4; 
-      var debtorTotal = this.sheet.getItem(row,column); 
+      var debtorTotal = 0 
       debtors[debtorName] = debtorTotal; 
       column = 3; 
       row++;
