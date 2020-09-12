@@ -71,6 +71,22 @@ itemTotal = function(){
   
    /**
   * Method function: 
+  * Method general summation method that adds to a specific total 
+  * @param  moneyItem object that holds a transaction item 
+  */
+  this.addToTotals = function(moneyItem, totals){
+    for(var i in totals){
+      var item = moneyItem.getCategory();
+      if(i == moneyItem.getCategory()){
+        totals[i] += moneyItem.getItemPrice()
+        break;
+      }
+      
+    } 
+  }
+  
+  /**
+  * Method function: 
   * Method takes a money item and and the category names from the spreadsheet and sets the totals for each category 
   * @param  moneyItem object that holds a transaction item 
   */
@@ -96,6 +112,20 @@ itemTotal = function(){
       return this.cards[card]
     }
    }
+   
+    /**
+  * Method function: 
+  * Method takes a category arguement and if the category is in the dictionary it returns the value  
+  * @param  category title string 
+  * @returns  ajoining value total for the category  
+  */
+   this.getValue = function(item, dict){
+      if(item in dict){
+        return dict[item];
+     }
+     else return "";
+   }
+   
    
   /**
   * Method function: 

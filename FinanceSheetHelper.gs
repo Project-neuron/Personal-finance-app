@@ -57,6 +57,7 @@ financeSheet = function(sheet){
       }else if(itemType == "debtItem"){
         itemTotals.addToDebtorTotals(moneyItem);
        
+       
       
       }
       row ++;

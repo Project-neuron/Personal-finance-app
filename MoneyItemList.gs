@@ -7,6 +7,7 @@
 
 moneyItemList = function() { 
   this.list = []
+  this.debtList = [];
   
   
   /**
@@ -18,6 +19,8 @@ moneyItemList = function() {
     
   }
   
+  
+  
   /**
   * Method function: 
   * Gets all money items from the main list that are debt items 
@@ -25,10 +28,9 @@ moneyItemList = function() {
   */
   
   this.makeDebtItemsList = function(){
-    var newList = this.list.filter(function(element, index, arr){
+     this.debtList = this.list.filter(function(element, index, arr){
       return element.getReimbursable() == true;  
     }) 
-    return newList;
   
   }
   
