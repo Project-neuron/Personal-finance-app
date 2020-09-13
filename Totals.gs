@@ -11,12 +11,26 @@ itemTotal = function(){
   this.itemCategories = {}; 
   this.debtors = {};
   
+  this.totals ={}; 
+  
    /**
   * Method function: 
   * Method Sets the item categories totals object into debtors   
   */
   this.setCards = function(financeSheet){
     this.cards = financeSheet.getCardNames();
+  } 
+  
+   /**
+  * Method function: 
+  * Method Sets the item categories totals object into the dict  
+  */
+  this.setTotals = function(totals){
+    this.totals = totals;
+  }
+  
+  this.getTotals = function(){
+    return this.totals;
   }
   
     /**
@@ -74,11 +88,11 @@ itemTotal = function(){
   * Method general summation method that adds to a specific total 
   * @param  moneyItem object that holds a transaction item 
   */
-  this.addToTotals = function(moneyItem, totals){
-    for(var i in totals){
-      var item = moneyItem.getCategory();
-      if(i == moneyItem.getCategory()){
-        totals[i] += moneyItem.getItemPrice()
+  this.addToTotals = function(moneyItemCheck, moneyItemPrice){
+    for(var i in this.totals){
+      var item = moneyItemCheck;
+      if(i == moneyItemCheck){
+        this.totals[i] += moneyItemPrice;
         break;
       }
       
@@ -119,9 +133,9 @@ itemTotal = function(){
   * @param  category title string 
   * @returns  ajoining value total for the category  
   */
-   this.getValue = function(item, dict){
-      if(item in dict){
-        return dict[item];
+   this.getValue = function(item){
+      if(item in this.totals){
+        return this.totals[item];
      }
      else return "";
    }

@@ -9,14 +9,14 @@
 cardTotals = function(totals) { 
 
     this.itemTotals = totals; 
-    this.cards = {}; 
+     
     
     /**
     * Method function: 
     * Method Sets the item categories totals object into debtors   
     */
     this.setCards = function(financeSheet){
-      this.cards = financeSheet.getCardNames();
+      this.itemTotals.setTotals(financeSheet.getCardNames());
     }
     
       
@@ -25,7 +25,7 @@ cardTotals = function(totals) {
     * Method gets the card totals  
     */
     this.getCardTotals = function(){
-      return this.cards;
+      return this.itemTotals.getTotals();
     }
     
     /**
@@ -34,7 +34,7 @@ cardTotals = function(totals) {
     * @param  moneyItem object that holds a transaction item 
     */
     this.addToCardTotals = function(moneyItem){
-      this.itemTotals.addToTotals(moneyItem, this.card);
+      this.itemTotals.addToTotals(moneyItem.getCardUsed(), moneyItem.getItemPrice());
     }
     
     /**
@@ -44,6 +44,6 @@ cardTotals = function(totals) {
     * @returns  ajoining value total for the category  
     */
     this.getCardValue = function(card){
-      return this.itemTotals.getValue(card, this.cards);
+      return this.itemTotals.getValue(card);
      }
    }
