@@ -115,22 +115,23 @@ function categoryTotalsTest(){
   
 } 
 
-function testDebtorTotals() { 
+function debtorTotalsTest() { 
     var itemsCategorySheet = new financeSheet(new sheet(5));  
-    var totals = new itemTotal()
-    totals.setDebtorCategories(itemsCategorySheet);  
+    
+    var DebtTotals = new debtTotals(new itemTotal());
+    DebtTotals.setDebtorCategories(itemsCategorySheet);  
     
     var moneyItem1 = new moneyitem("Amazon purchases",25, "Amazon", "Auto & transport", true, "Brian");
     var moneyItem2 = new moneyitem("Parking",26,"Pay-pal","Fast food", true, "Fiona");
     var moneyItem3 = new moneyitem("Door dash",27 ,"Citi bank","Shopping", true, "Mieshon"); 
     
-    totals.addToDebtorTotals(moneyItem1);
-    totals.addToDebtorTotals(moneyItem2);
-    totals.addToDebtorTotals(moneyItem3);
+    DebtTotals.addToDebtorTotals(moneyItem1);
+    DebtTotals.addToDebtorTotals(moneyItem2);
+    DebtTotals.addToDebtorTotals(moneyItem3);
     
-    var result1 = equalsTest(totals.getDebtorValue("Brian"), 25);
-    var result2 = equalsTest(totals.getDebtorValue("Fiona"), 26);
-    var result3 = equalsTest(totals.getDebtorValue("Mieshon"), 27);
+    var result1 = equalsTest(DebtTotals.getDebtorValue("Brian"), 25);
+    var result2 = equalsTest(DebtTotals.getDebtorValue("Fiona"), 26);
+    var result3 = equalsTest(DebtTotals.getDebtorValue("Mieshon"), 27);
     
     if(result1 == "Pass" && result2 == "Pass" && result3 =="Pass"){
       return "pass";

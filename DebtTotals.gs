@@ -9,14 +9,13 @@
 debtTotals = function(totals) { 
 
     this.itemTotals = totals; 
-    this.debtors = {};
     
      /**
     * Method function: 
     * Method Sets the debtor totals object into debtors   
     */
     this.setDebtorCategories = function(financeSheet){
-      this.debtors = financeSheet.getDebtorTotals();
+      this.itemTotals.setTotals(financeSheet.getDebtorTotals());
     }
     
       
@@ -24,8 +23,8 @@ debtTotals = function(totals) {
     * Method function: 
     * Method gets the card totals  
     */
-    this.getCardTotals = function(){
-      return this.cards;
+    this.getDebtTotals = function(){
+      return this.itemTotals.getTotals();;
     }
     
    /**
@@ -34,7 +33,7 @@ debtTotals = function(totals) {
     */  
     this.addToDebtorTotals = function(moneyItem){ 
       if(moneyItem.getReimbursable() == true){
-        this.itemTotals.addToTotals(moneyItem, this.debtors);
+        this.itemTotals.addToTotals(moneyItem.getDebtor(), moneyItem.getItemPrice());;
       }
         
     }
@@ -45,7 +44,9 @@ debtTotals = function(totals) {
     * @param  category title string 
     * @returns  ajoining value total for the category  
     */
-    this.getCardValue = function(card){
-      return this.itemTotals.getValue(card, this.debtors);
-     }
+    this.getDebtorValue = function(debtor){
+     return this.itemTotals.getValue(debtor);
+     } 
+     
+     
    }
