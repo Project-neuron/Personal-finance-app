@@ -146,9 +146,9 @@ function debtorTotalsTest() {
 }
 
 function testAllFunctions(){
-  var test1 = testDebtorTotals(); 
-  var test2 = categoryTotals(); 
-  var test3 = cardTotalsTest(); 
+  var test1 = cardtotalsTest(); 
+  var test2 = categoryTotalsTest(); 
+  var test3 = debtorTotalsTest(); 
 }
 
 
