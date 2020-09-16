@@ -178,15 +178,23 @@ function testRunOfProd(){
   MoneyItemList.makeDebtItemsList();
   ItemsCategorySheet.loadMoneyItems(MoneyItemList, 6,"debtItem");
   
-  //obtain and initialize totals 
-  for(i in MoneyItemList.getMoneyItemList()){
-    CardTotals.addToCardTotals(i); 
-    CategoryTotals.addToCategoryTotals(i);
+  //Obtain and initialize totals 
+  var itemList = MoneyItemList.getMoneyItemList()
+  for(var i = 0; i < itemList.length; i++){
+    CardTotals.addToCardTotals(itemList[i]); 
+    CategoryTotals.addToCategoryTotals(itemList[i]);
   }
   
-  for(i in MoneyItemList.getDebtItemList()){
-    DebtTotals.addToDebtorTotals(i);
+  var debtList = MoneyItemList.getDebtItemList();
+  for(var i = 0; i < debtList.length; i++){
+    DebtTotals.addToDebtorTotals(debtList[i]);
   }
+  
+  CardSheet.setCardTotals(CardTotals.getCardTotals());
+  BudgetSheet.setBudgetTotals(CategoryTotals.getItemCategories());
+  ItemsCategorySheet.setDebtorTotals(DebtTotals.getDebtTotals());
+  
+  var end = "end" 
   
   
   
