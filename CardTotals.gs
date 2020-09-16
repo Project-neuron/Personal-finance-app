@@ -46,4 +46,6 @@ cardTotals = function(totals) {
     this.getCardValue = function(card){
       return this.itemTotals.getValue(card);
      }
+     
+    
    }

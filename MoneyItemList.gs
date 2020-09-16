@@ -19,7 +19,17 @@ moneyItemList = function() {
     
   }
   
+  this.putInDebtList = function(moneyItem){
+    this.debtList.push(moneyItem);
+  }
   
+  this.getMoneyItemList = function(){
+    return this.list;
+  }
+  
+  this.getDebtItemList = function(){
+    return this.debtList;
+  }
   
   /**
   * Method function: 
@@ -29,10 +39,12 @@ moneyItemList = function() {
   
   this.makeDebtItemsList = function(){
      this.debtList = this.list.filter(function(element, index, arr){
-      return element.getReimbursable() == true;  
+      return element.getCategory() == "Reimbursement";  
     }) 
   
   }
+  
+
   
   
   

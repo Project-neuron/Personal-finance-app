@@ -56,10 +56,7 @@ financeSheet = function(sheet){
         moneyItemList.putInList(moneyItem);
       }else if(itemType == "debtItem"){
         itemTotals.addToDebtorTotals(moneyItem);
-       
-       
-      
-      }
+                      }
       row ++;
       sheetColumn=column; 
       
@@ -67,6 +64,47 @@ financeSheet = function(sheet){
   
     
   }
+  
+   /**
+  * Method function: 
+  * Method goes to the underlying spread sheet and pulls the fincance transaction items from the sheet 
+  * and loads them into a list to be passed to another method, it also agregates the totals as well  
+  */
+  this.loadMoneyItems = function(moneyItemList, column, type){
+    var row = 2; 
+    var sheetColumn = column; 
+    while(this.sheet.getItem(row,sheetColumn)!= ""){
+      var itemName = this.sheet.getItem(row,sheetColumn);
+      sheetColumn ++;
+      var itemPrice = this.sheet.getItem(row,sheetColumn);
+      sheetColumn ++;
+      var cardUsed = this.sheet.getItem(row,sheetColumn);
+      sheetColumn ++;
+      var purchaseCategory = this.sheet.getItem(row,sheetColumn);
+      sheetColumn ++;
+      var reimbersable = this.sheet.getItem(row,sheetColumn);
+      sheetColumn ++; 
+      var debtor = this.sheet.getItem(row,sheetColumn);
+      sheetColumn ++;
+      
+       
+
+      var moneyItem = new moneyitem(itemName, itemPrice, cardUsed, purchaseCategory, reimbersable, debtor);
+      if(type == "moneyItem"){
+        moneyItemList.putInList(moneyItem);
+      }else if(type == "debtItem"){
+        moneyItemList.putInDebtList(moneyItem);
+      }
+     
+      row ++;
+      sheetColumn=column; 
+      
+    } 
+  
+    
+  }
+  
+  
   
   /**
   * Method function: 
@@ -85,6 +123,22 @@ financeSheet = function(sheet){
     }
     return cardNames;
   
+  }
+  
+  /**
+  * Method function: 
+  * Method goes to the underlying spread sheet and pulls the  relevant names  strings 
+  * and loads them into a list to be passed to another method 
+  */
+  this.getNames = function(row, column){
+    var names = {}; 
+    while(this.sheet.getItem(row,column)!= ""){
+      var cardItemName = this.sheet.getItem(row,column);
+      cardNames[cardItemName] = 0;
+      row++;
+    
+    }
+    return names;
   }
   
   /**

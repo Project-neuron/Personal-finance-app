@@ -133,7 +133,9 @@ function debtorTotalsTest() {
     var result2 = equalsTest(DebtTotals.getDebtorValue("Fiona"), 26);
     var result3 = equalsTest(DebtTotals.getDebtorValue("Mieshon"), 27);
     
-    if(result1 == "Pass" && result2 == "Pass" && result3 =="Pass"){
+    if(result1 == "Pass"  
+    && result2 == "Pass" 
+    && result3 =="Pass"){
       return "pass";
     }
     else{
@@ -147,5 +149,54 @@ function testAllFunctions(){
   var test1 = testDebtorTotals(); 
   var test2 = categoryTotals(); 
   var test3 = cardTotalsTest(); 
+}
+
+
+
+function testRunOfProd(){
+  // various sheets 
+  var ItemSheet = new financeSheet(new sheet(0));
+  var ItemsCategorySheet = new financeSheet(new sheet(5));
+  var BudgetSheet = new financeSheet(new sheet(1));
+  var CardSheet = new financeSheet(new sheet(3)); 
+  
+  // moneyitem list 
+  var MoneyItemList = new moneyItemList();
+  
+  // Totals initialization 
+  var DebtTotals = new debtTotals(new itemTotal());
+  DebtTotals.setDebtorCategories(ItemsCategorySheet); 
+  
+  var CategoryTotals = new categoryTotals(new itemTotal());
+  CategoryTotals.setItemCategories(ItemsCategorySheet)
+  
+  var CardTotals = new cardTotals(new itemTotal());
+  CardTotals.setCards(ItemsCategorySheet);
+  
+  // load items and debt items into items list 
+  ItemSheet.loadMoneyItems(MoneyItemList,1,"moneyItem"); 
+  MoneyItemList.makeDebtItemsList();
+  ItemsCategorySheet.loadMoneyItems(MoneyItemList, 6,"debtItem");
+  
+  //obtain and initialize totals 
+  for(i in MoneyItemList.getMoneyItemList()){
+    CardTotals.addToCardTotals(i); 
+    CategoryTotals.addToCategoryTotals(i);
+  }
+  
+  for(i in MoneyItemList.getDebtItemList()){
+    DebtTotals.addToDebtorTotals(i);
+  }
+  
+  
+  
+  
+  
+   
+  
+  
+  
+  
+
 }
 

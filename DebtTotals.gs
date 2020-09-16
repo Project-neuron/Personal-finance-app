@@ -46,7 +46,9 @@ debtTotals = function(totals) {
     */
     this.getDebtorValue = function(debtor){
      return this.itemTotals.getValue(debtor);
-     } 
+     }  
+     
+     
      
      
    }

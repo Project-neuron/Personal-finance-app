@@ -49,6 +49,8 @@ sheet = function(index){
    this.getRange = function(row, column,startColumn, endColumn){
      return this.activeSheet.getRange(row, column, startColumn, endColumn).getValues()[0]; 
    }
+   
+   
  
 }
 
