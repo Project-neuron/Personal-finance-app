@@ -39,7 +39,7 @@ moneyItemList = function() {
   
   this.makeDebtItemsList = function(){
      this.debtList = this.list.filter(function(element, index, arr){
-      return element.getCategory() == "Reimbursement";  
+      return element.getCategory() == "Reimbursement" && element.getReimbursable() == true;  
     }) 
   
   }

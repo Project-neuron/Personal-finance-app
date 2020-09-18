@@ -7,20 +7,33 @@
   */
 financeSheet = function(sheet){
 
-  
-
-   this.sheet = sheet;
+  this.sheet = sheet;
    /**
   * Method function: 
   * Method goes to the underlying spread sheet and clears all the items
   */
-   this.clearAllItems = function(){
+   this.clearAllItems = function(column){
     var row = 2; 
-    var column = 1; 
+    var sheetColumn = column; 
    
-    while(this.sheet.getItem(row,column) != ""){
+    while(this.sheet.getItem(row,sheetColumn) != ""){
+      this.sheet.setItem(row, sheetColumn, "");
+      sheetColumn ++;
+      this.sheet.setItem(row,sheetColumn, "");
+      sheetColumn ++;
+      this.sheet.setItem(row,sheetColumn, "");
+      sheetColumn ++;
+      this.sheet.setItem(row,sheetColumn,"");
+      sheetColumn ++;
+      this.sheet.setItem(row,sheetColumn, "");
+      sheetColumn ++; 
+      this.sheet.setItem(row,sheetColumn, "");
+      sheetColumn ++;  
+      
+      row ++;
+      sheetColumn=column;
         
-      }
+    }
   
   }
   
@@ -63,6 +76,30 @@ financeSheet = function(sheet){
     } 
   
     
+  }
+  
+  /**
+  * Method function: 
+  * Method Goes to the debt Item list and sets the outstanding debt items into a seperate sheet  
+  */
+  this.setDebtItems = function(debtItemList, column){ 
+    var row = 2; 
+    var sheetColumn = column; 
+    for(var i = 0; i < moneyItemList.length; i++){
+        this.sheet.setItem(row, sheetColumn, debtItemList[i].getItemName());
+        sheetColumn ++;
+        this.sheet.setItem(row,sheetColumn, debtItemList[i].getItemPrice());
+        sheetColumn ++;
+        this.sheet.setItem(row,sheetColumn, debtItemList[i].getCardUsed());
+        sheetColumn ++;
+        this.sheet.setItem(row,sheetColumn,debtItemList[i].getCategory());
+        sheetColumn ++;
+        this.sheet.setItem(row,sheetColumn,debtItemList[i].getReimbursable());
+        sheetColumn ++; 
+        this.sheet.setItem(row,sheetColumn,debtItemList[i].getDebtor());
+        sheetColumn ++; 
+      }
+  
   }
   
   

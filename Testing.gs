@@ -153,7 +153,7 @@ function testAllFunctions(){
 
 
 
-function testRunOfProd(){
+function CalculateTotalsTest(){
   // various sheets 
   var ItemSheet = new financeSheet(new sheet(0));
   var ItemsCategorySheet = new financeSheet(new sheet(5));
@@ -196,15 +196,31 @@ function testRunOfProd(){
   
   var end = "end" 
   
-  
-  
-  
-  
-   
-  
-  
-  
-  
+} 
 
+function EndOfMonthRunTest(){ 
+
+  // initialize a sheet 
+  var ItemSheet = new financeSheet(new sheet(0));
+  var ItemsCategorySheet = new financeSheet(new sheet(5));  
+  
+  // initialize item holder class
+  var MoneyItemList = new moneyItemList();
+  
+  // Gather all debt items  
+  ItemSheet.loadMoneyItems(MoneyItemList,1,"moneyItem"); 
+  MoneyItemList.makeDebtItemsList();
+  ItemsCategorySheet.loadMoneyItems(MoneyItemList, 6,"debtItem");  
+  
+  // clear underlying sheets 
+  ItemSheet.clearAllItems(1);  
+  ItemsCategorySheet.clearAllItems(6); 
+  
+  //set the debt items back 
+  ItemsCategorySheet.setDebtItems(MoneyItemList.getDebtItemList(),6); 
+  
+  
+  
+  
 }
 
