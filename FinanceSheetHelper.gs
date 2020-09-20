@@ -84,8 +84,8 @@ financeSheet = function(sheet){
   */
   this.setDebtItems = function(debtItemList, column){ 
     var row = 2; 
-    var sheetColumn = column; 
-    for(var i = 0; i < moneyItemList.length; i++){
+    var sheetColumn = column;  
+    for(var i = 0; i < debtItemList.length; i++){
         this.sheet.setItem(row, sheetColumn, debtItemList[i].getItemName());
         sheetColumn ++;
         this.sheet.setItem(row,sheetColumn, debtItemList[i].getItemPrice());
@@ -97,7 +97,8 @@ financeSheet = function(sheet){
         this.sheet.setItem(row,sheetColumn,debtItemList[i].getReimbursable());
         sheetColumn ++; 
         this.sheet.setItem(row,sheetColumn,debtItemList[i].getDebtor());
-        sheetColumn ++; 
+        sheetColumn=column;  
+        row++;
       }
   
   }
