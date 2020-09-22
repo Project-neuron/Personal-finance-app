@@ -50,12 +50,22 @@ function EndOfMonthRunTest(){
   var ItemsCategorySheet = new financeSheet(new sheet(5));  
   
   // initialize item holder class
-  var MoneyItemList = new moneyItemList();
+  var MoneyItemList = new moneyItemList(); 
+  
+  // set up card totals
+  var CardTotals = new cardTotals(new itemTotal());
+  CardTotals.setCards(ItemsCategorySheet); 
   
   // Gather all debt items  
   ItemSheet.loadMoneyItems(MoneyItemList,1,"moneyItem"); 
   MoneyItemList.makeDebtItemsList();
-  ItemsCategorySheet.loadMoneyItems(MoneyItemList, 6,"debtItem");  
+  ItemsCategorySheet.loadMoneyItems(MoneyItemList, 6,"debtItem");   
+  
+  //Obtain and initialize totals 
+  var itemList = MoneyItemList.getMoneyItemList()
+  for(var i = 0; i < itemList.length; i++){
+    CardTotals.addToCardTotals(itemList[i]); 
+  }
   
   // clear underlying sheets 
   ItemSheet.clearAllItems(1);  
@@ -63,6 +73,8 @@ function EndOfMonthRunTest(){
   
   //set the debt items back 
   ItemsCategorySheet.setDebtItems(MoneyItemList.getDebtItemList(),6); 
+  ItemsCategorySheet.setCardTotals(CardTotals.getCardTotals(), 14);
+  
   
   
   

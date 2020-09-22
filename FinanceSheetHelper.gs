@@ -164,14 +164,14 @@ financeSheet = function(sheet){
   * Method function: 
   * Method Takes the credit card totals and assigns them to the finance sheet
   */
-  this.setCardTotals = function(cardTotals){
+  this.setCardTotals = function(cardTotals, column){
     var row = 2; 
-    var column = 1;
+    var sheetColumn = column;
     for(var i in cardTotals){
-      this.sheet.setItem(row, column, i)
-      column = 2; 
-      this.sheet.setItem(row, column, cardTotals[i])
-      column = 1; 
+      this.sheet.setItem(row, sheetColumn, i)
+      sheetColumn++; 
+      this.sheet.setItem(row, sheetColumn, cardTotals[i])
+      sheetColumn = column; 
       row++;
     }
   }

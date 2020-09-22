@@ -36,7 +36,7 @@ function setTotals(){
     DebtTotals.addToDebtorTotals(debtList[i]);
   }
   
-  CardSheet.setCardTotals(CardTotals.getCardTotals());
+  CardSheet.setCardTotals(CardTotals.getCardTotals(), 1);
   BudgetSheet.setBudgetTotals(CategoryTotals.getItemCategories());
   ItemsCategorySheet.setDebtorTotals(DebtTotals.getDebtTotals());
   
