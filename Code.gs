@@ -41,6 +41,44 @@ function setTotals(){
   ItemsCategorySheet.setDebtorTotals(DebtTotals.getDebtTotals());
   
 
+} 
+
+function endOfMonth(){
+// initialize a sheet 
+  var ItemSheet = new financeSheet(new sheet(0));
+  var ItemsCategorySheet = new financeSheet(new sheet(5));  
+  var CardTotalsSheet = new financeSheet(new sheet(3)); 
+  var BudgetSheet = new financeSheet(new sheet(2))
+  
+  // initialize item holder class
+  var MoneyItemList = new moneyItemList(); 
+  
+  // set up card totals
+  var CardTotals = new cardTotals(new itemTotal());
+  CardTotals.setCards(ItemsCategorySheet); 
+  
+  // Gather all debt items  
+  ItemSheet.loadMoneyItems(MoneyItemList,1,"moneyItem"); 
+  MoneyItemList.makeDebtItemsList();
+  ItemsCategorySheet.loadMoneyItems(MoneyItemList, 6,"debtItem");   
+  
+  //Obtain and initialize totals 
+  var itemList = MoneyItemList.getMoneyItemList()
+  for(var i = 0; i < itemList.length; i++){
+    CardTotals.addToCardTotals(itemList[i]); 
+  }
+  
+  // clear underlying sheets 
+  ItemSheet.clearAllItems(1);  
+  ItemsCategorySheet.clearAllItems(6);
+  CardTotalsSheet.clearRow(2); 
+  BudgetSheet.clearRow(3);
+  
+  
+  //set the debt items back 
+  ItemsCategorySheet.setDebtItems(MoneyItemList.getDebtItemList(),6); 
+  ItemsCategorySheet.setCardTotals(CardTotals.getCardTotals(), 15);
+
 }
 
 

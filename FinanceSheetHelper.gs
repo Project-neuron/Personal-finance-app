@@ -8,7 +8,9 @@
 financeSheet = function(sheet){
 
   this.sheet = sheet;
-   /**
+   
+   
+  /**
   * Method function: 
   * Method goes to the underlying spread sheet and clears all the items
   */
@@ -33,6 +35,20 @@ financeSheet = function(sheet){
       row ++;
       sheetColumn=column;
         
+    }
+  
+  }
+  
+  /**
+  * Method function: 
+  * Method goes to the underlying spread sheet and clears all the items from a designated row
+  */
+  this.clearRow = function(column){
+    var row = 2; 
+    var sheetColumn = column; 
+    while(this.sheet.getItem(row,sheetColumn) != ""){
+       this.sheet.setItem(row, sheetColumn, "");
+       row ++;
     }
   
   }

@@ -73,10 +73,8 @@ function EndOfMonthRunTest(){
   
   //set the debt items back 
   ItemsCategorySheet.setDebtItems(MoneyItemList.getDebtItemList(),6); 
-  ItemsCategorySheet.setCardTotals(CardTotals.getCardTotals(), 14);
+  ItemsCategorySheet.setCardTotals(CardTotals.getCardTotals(), 15); 
   
-  
-  
-  
+  var end = "end";
   
 }
