@@ -145,11 +145,17 @@ financeSheet = function(sheet){
   * Method goes to the underlying spread sheet and pulls the  relevant names  strings 
   * and loads them into a list to be passed to another method 
   */
-  this.getNames = function(row, column){
+  this.getNames = function(row, column, type){
     var names = {}; 
     while(this.sheet.getItem(row,column)!= ""){
-      var cardItemName = this.sheet.getItem(row,column);
-      names[cardItemName] = 0;
+      var cardItemName = this.sheet.getItem(row,column);  
+      if(type == "name + value"){  
+        var value = column + 1;
+        names[cardItemName] = this.sheet.getItem(row, value); 
+      } 
+      else if(type == "name"){ 
+        names[cardItemName] = 0;
+      }
       row++;
     
     }
@@ -172,7 +178,10 @@ financeSheet = function(sheet){
     
     }
     return categoryNames;
-  }
+  } 
+  
+  
+  
   
  
   

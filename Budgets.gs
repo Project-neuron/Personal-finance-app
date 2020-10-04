@@ -15,7 +15,7 @@ budgets = function(){
     * Method Sets the item category totals object into item categories   
     */
     this.setItemCategories = function(financeSheet){
-      this.itemTotals.setTotals(financeSheet.pullAllCategoryNames());
+      this.itemTotals.setTotals(financeSheet.getNames(2,1,"name + value"));
     }
     
       
@@ -48,6 +48,24 @@ budgets = function(){
     return this.itemTotals.getValue(categoryTitle);
     
    } 
+   
+  /**
+  * Method function: 
+  * Method takes a category arguement and if the category is in the dictionary it returns the value  
+  * @param  category title string 
+  * @returns  ajoining value total for the category  
+  * 
+  * Do the math for the current budget totals, as long as the totals arent over 100% do nothing 
+  * if the amount is over 100 then subtract out the amount over which the percent has gone up  
+  * then find the total number of free categories that still have room 
+  * if no categories do nothing 
+  * if some categories are found divide the overage amount by the number of free categories 
+  * then subtract that amount from the categories 
+  * after which you should add the over amount to the category that is over 
+  * 
+  */ 
+  
+   
 
   
 }
