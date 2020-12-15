@@ -18,22 +18,23 @@ dynamicBudget = function(sheet){
    // sheet object assigned
    this.sheet = sheet;
    
+   
+   
    /**
     * Method function: 
     * Method Sets the item  totals object into debtors   
     */
-    this.setBudgetNumbers = function(row, column){
+    this.setBudgetNumbers = function(row, column){ 
+        
         while(this.sheet.getItem(row,column)!= ""){
           var budgetItemName = this.sheet.getItem(row,column);  
           var updateColumn = column + 1;
-          this.budgetNumbers[budgetItemName] = setBudgetValues(row, updateColumn); 
+          this.budgetNumbers[budgetItemName] = this.setBudgetValues(row, updateColumn); 
           row++;
     
         }
     } 
        
-    
-    
     /** 
     * Method function: 
     * Method gets the values and sets them into an object 
@@ -48,6 +49,8 @@ dynamicBudget = function(sheet){
       
       return values
    }
+    
+    
    
     /** 
     * Method function: 

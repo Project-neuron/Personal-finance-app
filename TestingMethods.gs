@@ -148,14 +148,13 @@ function debtorTotalsTest() {
 } 
 
 function dynamicBudgetTest(){
-  // Set up the budget sheet object as well as the dynamic budget object 
-  var TestingSheet = new financeSheet(new sheet(6)); 
-  var DynamicBudget = new dynamicBudget(TestingSheet); 
+  // Set up the budget sheet object as well as the dynamic budget object  
+  var DynamicBudget = new dynamicBudget(new sheet(6)); 
   
   // pull in the information from the sheet and load it into the dynamic budget object 
   DynamicBudget.setBudgetNumbers(2,1);  
   
-  var result1 = doubleValueEqualsTest(DynamicBudget.getValues('Fast food'), 100, 92.26)
+  var result1 = doubleValueEqualsTest(DynamicBudget.getValues('Fast food'), 100, 92)
   
   if(result1 == "Pass"){
       return "pass";
